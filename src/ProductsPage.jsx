@@ -9,7 +9,7 @@ function ProductsPage() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const fetchedProducts = await getProducts();
+                const fetchedProducts = await getProducts(selectedCategory);
                 const fetchedCategories = await getCategories();
                 setCategories(fetchedCategories);
                 setProducts(fetchedProducts);
@@ -19,12 +19,7 @@ function ProductsPage() {
         };
 
         fetchData();
-    }, []);
-
-    const handleCategoryChange = (category) => {
-        setSelectedCategory(category);
-        console.log(selectedCategory);
-    };
+    }, [selectedCategory]);
 
     const createProductPreviewCard = (product) => {
         return (
@@ -46,8 +41,8 @@ function ProductsPage() {
                     {categories.map((category) => 
                         <button 
                             key={category} 
-                            onClick={() => handleCategoryChange(category)} 
-                            className='category-button'
+                            onClick={() => setSelectedCategory(category)} 
+                            className={selectedCategory === category ? 'category-button-selected' : 'category-button'}
                         >
                             {category}
                         </button>

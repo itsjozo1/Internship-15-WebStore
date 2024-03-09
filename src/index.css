@@ -43,6 +43,14 @@ header {
   transition: background-color 0.3s;
 }
 
+.category-button-selected {
+  padding: 0.25rem;
+  border-radius: 0.5rem;
+  background-color: yellow;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
 .category-button:hover {
   background-color: #e0e0e0;
 }

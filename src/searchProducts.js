@@ -1,11 +1,13 @@
-const getProducts = async (selectedCategory) => {
+const getProducts = async (selectedCategory, searchParams) => {
     try {
         let baseUrl = "https://fakestoreapi.com/products";
 
         if (selectedCategory) {
             baseUrl += `/category/${selectedCategory}`;
         }
-        
+        if (searchParams) {
+            baseUrl += `?name=${searchParams}`;
+        }
         console.log(baseUrl);
         const response = await fetch(baseUrl);
         const json = await response.json();

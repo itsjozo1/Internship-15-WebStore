@@ -1,21 +1,30 @@
 import { useEffect, useState } from 'react';
-import { getProducts } from "./searchProducts";
+import { getProducts, getCategories } from "./searchProducts";
 
 function ProductsPage() {
+    const [categories, setCategories] = useState([]);
     const [products, setProducts] = useState([]);
+    const [selectedCategory, setSelectedCategory] = useState('');
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const fetchedProducts = await getProducts();
+                const fetchedCategories = await getCategories();
+                setCategories(fetchedCategories);
                 setProducts(fetchedProducts);
             } catch (error) {
-                console.error('Error fetching products:', error);
+                console.error('Greška u dohvaćanju proizvoda:', error);
             }
         };
 
         fetchData();
     }, []);
+
+    const handleCategoryChange = (category) => {
+        setSelectedCategory(category);
+        console.log(selectedCategory);
+    };
 
     const createProductPreviewCard = (product) => {
         return (
@@ -24,14 +33,29 @@ function ProductsPage() {
                 <h3>{product.title}</h3>
             </div>
         );
-    }
-
-    const productsCards = products.map(createProductPreviewCard);
+    };
 
     return (
         <div className='products-container'>
-            <div className="filter-products-container">
-                {productsCards}
+            <div className='filter-products-container'>
+                <h1>Pretraži proizvode</h1>
+                <h2>Naziv proizvoda</h2>
+                <input type="text" placeholder='Ime proizvoda' className='filter-products-name-input'/>
+                <h2>Kategorije</h2>
+                <div className='categories-buttons-container'>
+                    {categories.map((category) => 
+                        <button 
+                            key={category} 
+                            onClick={() => handleCategoryChange(category)} 
+                            className='category-button'
+                        >
+                            {category}
+                        </button>
+                    )}
+                </div>
+            </div>
+            <div className="filter-products-results-container">
+                {products.map(createProductPreviewCard)}
             </div>
         </div>
     );

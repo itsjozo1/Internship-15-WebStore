@@ -9,4 +9,15 @@ const getProducts = async () => {
     }
 }
 
-export { getProducts };
+const getCategories = async () => {
+    try {
+        const response = await fetch('https://fakestoreapi.com/products/categories');
+        const json = await response.json();
+        return json;
+    } catch (error) {
+        console.error('Greška u dohvačanju kategorija:', error);
+        throw error;
+    }
+}
+
+export { getProducts, getCategories };

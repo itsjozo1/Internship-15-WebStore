@@ -1,18 +1,20 @@
 import { useEffect, useState } from 'react';
 import { getProducts, getCategories } from "./searchProducts";
-import { useSearchParams } from "react-router-dom";
 
 function ProductsPage() {
     const [categories, setCategories] = useState([]);
     const [products, setProducts] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState('');
-    const [searchParams, setSearchParams] = useSearchParams({});
+    const [name, setName] = useState('');
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const fetchedProducts = await getProducts(selectedCategory, searchParams.name);
+                let fetchedProducts = await getProducts(selectedCategory);
                 const fetchedCategories = await getCategories();
+                if (name) {
+                    fetchedProducts = fetchedProducts.filter((product) => product.title.toLowerCase().includes(name.toLowerCase()));
+                }
                 setCategories(fetchedCategories);
                 setProducts(fetchedProducts);
             } catch (error) {
@@ -21,7 +23,7 @@ function ProductsPage() {
         };
 
         fetchData();
-    }, [selectedCategory, searchParams.name]);
+    }, [selectedCategory, name]);
 
     const createProductPreviewCard = (product) => {
         return (
@@ -49,7 +51,7 @@ function ProductsPage() {
                         type="text" 
                         placeholder='Ime proizvoda' 
                         className='filter-products-name-input' 
-                        onChange={(event) => setSearchParams({ name: event.target.value })}
+                        onChange={(event) => setName(event.target.value)}
                 />
                 <h2>Kategorije</h2>
                 <div className='categories-buttons-container'>
@@ -65,7 +67,9 @@ function ProductsPage() {
                 </div>
             </div>
             <div className="filter-products-results-container">
-                {products.map(createProductPreviewCard)}
+                {
+                    products.length > 0 ? products.map(createProductPreviewCard) : <h2 className='no-results-container'>Nema rezultata pretrage</h2>
+                }
             </div>
         </div>
     );

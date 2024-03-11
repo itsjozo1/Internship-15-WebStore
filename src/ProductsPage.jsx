@@ -47,7 +47,7 @@ function ProductsPage() {
         key={product.id}
         className="product-preview-card"
         onClick={() => {
-          navigate("/product");
+          navigate(`/products/${product.id}`, { state: { product } });
         }}
       >
         <img src={product.image} alt={product.title} />

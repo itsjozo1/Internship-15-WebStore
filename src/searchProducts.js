@@ -1,9 +1,13 @@
-const getProducts = async (selectedCategory) => {
+const getProducts = async (selectedCategory, limit) => {
     try {
         let baseUrl = "https://fakestoreapi.com/products";
 
         if (selectedCategory) {
             baseUrl += `/category/${selectedCategory}`;
+        }
+
+        if (limit) {    
+            baseUrl += `?limit=${limit}`;
         }
         const response = await fetch(baseUrl);
         const json = await response.json();

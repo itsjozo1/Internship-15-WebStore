@@ -39,7 +39,7 @@ const Home = () => {
       </header>
       <Routes>
         <Route path="/" element={<ProductsPage />} />
-        <Route path="/product" element={<Product />} />
+        <Route path="/products/:id" element={<Product />} />
         <Route path="*" element={<h1>404 - Not Found</h1>} />
       </Routes>
     </>

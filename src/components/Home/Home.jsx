@@ -40,7 +40,7 @@ const Home = () => {
           <input
             className={classes.navbarSearchInput}
             type="text"
-            placeholder="Pretraži proizvod"
+            placeholder="Search products..."
             value={searchValue}
             onChange={handleChange}
             onKeyPress={handleKeyPress}
@@ -49,7 +49,7 @@ const Home = () => {
             className={classes.navbarSearchButton}
             onClick={handleSearchButtonClick}
           >
-            Pretraži
+            Search
           </button>
         </nav>
       </header>

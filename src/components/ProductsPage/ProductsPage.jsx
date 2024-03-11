@@ -67,17 +67,17 @@ function ProductsPage() {
   return (
     <div className={classes.productsContainer}>
       <div className={classes.filterProductsContainer}>
-        <h1>Pretraži proizvode</h1>
-        <h2>Naziv proizvoda</h2>
+        <h1>Filter products</h1>
+        <h2>Product title</h2>
         <input
           type="text"
-          placeholder="Ime proizvoda"
+          placeholder="Product title..."
           className="filter-products-name-input"
           onChange={(event) => {
             setName(event.target.value);
           }}
         />
-        <h2>Kategorije</h2>
+        <h2>Categories</h2>
         <div className={classes.categoriesButtonContainer}>
           {categories.map((category) => (
             <button

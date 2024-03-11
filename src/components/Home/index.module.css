@@ -3,6 +3,10 @@
   font-size: 4rem;
 }
 
+.headline:hover {
+  opacity: 0.5;
+}
+
 .navbarSearchInput {
   width: 20rem;
   padding: 0.2rem;

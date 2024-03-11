@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { getProducts, getCategories } from "../searchProducts";
+import { getProducts, getCategories } from "../../searchProducts";
 import { useLocation, useNavigate } from "react-router-dom";
+import classes from "./index.module.css";
 
 function ProductsPage() {
   const [categories, setCategories] = useState([]);
@@ -44,7 +45,7 @@ function ProductsPage() {
     return (
       <div
         key={product.id}
-        className="product-preview-card"
+        className={classes.productPreviewCard}
         onClick={() => {
           navigate(`/products/${product.id}`, { state: { product } });
         }}
@@ -64,8 +65,8 @@ function ProductsPage() {
   };
 
   return (
-    <div className="products-container">
-      <div className="filter-products-container">
+    <div className={classes.productsContainer}>
+      <div className={classes.filterProductsContainer}>
         <h1>Pretraži proizvode</h1>
         <h2>Naziv proizvoda</h2>
         <input
@@ -77,15 +78,15 @@ function ProductsPage() {
           }}
         />
         <h2>Kategorije</h2>
-        <div className="categories-buttons-container">
+        <div className={classes.categoriesButtonContainer}>
           {categories.map((category) => (
             <button
               key={category}
               onClick={() => handleClick(category)}
               className={
                 selectedCategory === category
-                  ? "category-button-selected"
-                  : "category-button"
+                  ? classes.categoryButtonSelected
+                  : classes.categoryButton
               }
             >
               {category}
@@ -93,11 +94,13 @@ function ProductsPage() {
           ))}
         </div>
       </div>
-      <div className="filter-products-results-container">
+      <div className={classes.filterProductsResultsContainer}>
         {products.length > 0 ? (
           products.map(createProductPreviewCard)
         ) : (
-          <h2 className="no-results-container">Nema rezultata pretrage</h2>
+          <h2 className={classes.noResultsContainer}>
+            Nema rezultata pretrage
+          </h2>
         )}
       </div>
     </div>

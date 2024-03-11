@@ -1,0 +1,53 @@
+.productPage {
+  display: flex;
+  gap: 2rem;
+}
+
+.productPagePreview {
+  display: flex;
+  gap: 2rem;
+  min-height: 25rem;
+  width: 55%;
+  background-color: white;
+  border-radius: 15px;
+  padding: 4rem;
+}
+
+.productPagePreview img {
+  height: 25rem;
+  width: 25rem;
+  object-fit: contain;
+}
+
+.productPageDesc {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.recommendedProductsContainer {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  gap: 2rem;
+}
+
+.recommendedProductCard {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  padding: 1rem;
+  border-radius: 1rem;
+  background-color: white;
+}
+
+.recommendedProductCard:hover {
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+  opacity: 0.9;
+}
+
+.recommendedProductCard img {
+  width: 7rem;
+  height: 7rem;
+  object-fit: contain;
+}

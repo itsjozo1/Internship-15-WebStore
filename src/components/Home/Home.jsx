@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
-import ProductsPage from "./ProductsPage";
-import Product from "./Product";
+import ProductsPage from "../ProductsPage/ProductsPage";
+import Product from "../Product/Product";
+import classes from "./index.module.css";
 
 const Home = () => {
   const [searchValue, setSearchValue] = useState("");
@@ -28,7 +29,7 @@ const Home = () => {
     <>
       <header>
         <h1
-          className="headline"
+          className={classes.headline}
           onClick={() => {
             navigate(`/`);
           }}
@@ -37,7 +38,7 @@ const Home = () => {
         </h1>
         <nav>
           <input
-            className="navbar-search-input"
+            className={classes.navbarSearchInput}
             type="text"
             placeholder="Pretraži proizvod"
             value={searchValue}
@@ -45,7 +46,7 @@ const Home = () => {
             onKeyPress={handleKeyPress}
           />
           <button
-            className="navbar-search-button"
+            className={classes.navbarSearchButton}
             onClick={handleSearchButtonClick}
           >
             Pretraži

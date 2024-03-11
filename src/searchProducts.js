@@ -13,7 +13,7 @@ const getProducts = async (selectedCategory, limit) => {
         const json = await response.json();
         return json;
     } catch (error) {
-        console.error('Greška u dohvačanju proizvoda:', error);
+        console.error(error);
         throw error;
     }
 }
@@ -26,7 +26,7 @@ const getCategories = async () => {
         const json = await response.json();
         return json;
     } catch (error) {
-        console.error('Greška u dohvačanju kategorija:', error);
+        console.error(error);
         throw error;
     }
 }

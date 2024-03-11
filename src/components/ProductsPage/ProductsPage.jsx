@@ -10,6 +10,7 @@ function ProductsPage() {
   const [name, setName] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
+
   const searchParams = new URLSearchParams(location.search);
   let search = searchParams.get("search");
   const [filterSearch, setFilterSearch] = useState(search);
@@ -21,20 +22,21 @@ function ProductsPage() {
         const fetchedCategories = await getCategories();
         let fetchedProducts = await getProducts(selectedCategory);
 
+        if (filterSearch) {
+          fetchedProducts = fetchedProducts.filter((product) =>
+            product.title.toLowerCase().includes(filterSearch.toLowerCase())
+          );
+        }
         if (name) {
           fetchedProducts = fetchedProducts.filter((product) =>
             product.title.toLowerCase().includes(name.toLowerCase())
-          );
-        } else if (filterSearch) {
-          fetchedProducts = fetchedProducts.filter((product) =>
-            product.title.toLowerCase().includes(filterSearch.toLowerCase())
           );
         }
 
         setCategories(fetchedCategories);
         setProducts(fetchedProducts);
       } catch (error) {
-        console.error("Greška u dohvaćanju proizvoda:", error);
+        console.error(error);
       }
     };
 

@@ -14,7 +14,7 @@ const Product = () => {
       try {
         let fetchedProducts = await getProducts(product.category, 4);
         const filteredProducts = fetchedProducts.filter(
-          (p) => p.id !== state.product.id
+          (product) => product.id !== state.product.id
         );
         setRecommendedProducts(filteredProducts);
       } catch (error) {

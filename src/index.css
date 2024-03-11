@@ -122,16 +122,34 @@ nav {
   gap: 2rem;
 }
 
+.recommended-product-card {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  padding: 1rem;
+  border-radius: 1rem;
+  background-color: white;
+}
+
+.recommended-product-card:hover {
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+  opacity: 0.9;
+}
+
 .recommended-product-card img {
   width: 7rem;
   height: 7rem;
+  object-fit: contain;
 }
 
 .product-page-preview {
   display: flex;
   gap: 2rem;
-  height: 25rem;
-  width: 65%;
+  min-height: 25rem;
+  width: 55%;
+  background-color: white;
+  border-radius: 15px;
+  padding: 4rem;
 }
 
 .product-page-desc {

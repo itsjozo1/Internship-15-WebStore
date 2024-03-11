@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { getProducts } from "./searchProducts.js";
 
 const Product = () => {
   const { state } = useLocation();
   const product = state.product;
   const [recommendedProducts, setRecommendedProducts] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchRecommendedProducts = async () => {
@@ -23,6 +24,10 @@ const Product = () => {
     fetchRecommendedProducts();
   }, [product.category, state.product.id]);
 
+  const handleClick = (product) => {
+    navigate(`/products/${product.id}`, { state: { product } });
+  };
+
   return (
     <div className="product-page">
       <div className="product-page-preview">
@@ -37,7 +42,11 @@ const Product = () => {
       <div className="recommended-products-container">
         <h2>Recommended products</h2>
         {recommendedProducts.map((product) => (
-          <div key={product.id} className="recommended-product-card">
+          <div
+            key={product.id}
+            className="recommended-product-card"
+            onClick={() => handleClick(product)}
+          >
             <img src={product.image} alt={product.title} />
             <h3>{product.title}</h3>
           </div>

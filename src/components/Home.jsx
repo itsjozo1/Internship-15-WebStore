@@ -11,16 +11,30 @@ const Home = () => {
     setSearchValue(event.target.value);
   };
 
-  const handleSearchButtonClick = () => {
+  const handleSearchButtonClick = (event) => {
+    event.preventDefault();
     if (searchValue) {
       navigate(`/?search=${searchValue}`);
+    }
+  };
+
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      handleSearchButtonClick(event);
     }
   };
 
   return (
     <>
       <header>
-        <h1 className="headline">Web trgovina</h1>
+        <h1
+          className="headline"
+          onClick={() => {
+            navigate(`/`);
+          }}
+        >
+          Web Shop
+        </h1>
         <nav>
           <input
             className="navbar-search-input"
@@ -28,6 +42,7 @@ const Home = () => {
             placeholder="Pretraži proizvod"
             value={searchValue}
             onChange={handleChange}
+            onKeyPress={handleKeyPress}
           />
           <button
             className="navbar-search-button"

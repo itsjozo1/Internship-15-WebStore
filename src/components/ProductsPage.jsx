@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getProducts, getCategories } from "./searchProducts";
+import { getProducts, getCategories } from "../searchProducts";
 import { useLocation, useNavigate } from "react-router-dom";
 
 function ProductsPage() {
@@ -8,7 +8,6 @@ function ProductsPage() {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [name, setName] = useState("");
   const navigate = useNavigate();
-
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   let search = searchParams.get("search");

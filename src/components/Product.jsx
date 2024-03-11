@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { getProducts } from "./searchProducts.js";
+import { getProducts } from "../searchProducts.js";
 
 const Product = () => {
   const { state } = useLocation();

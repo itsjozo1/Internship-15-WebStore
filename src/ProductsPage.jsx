@@ -1,20 +1,19 @@
 import { useEffect, useState } from "react";
 import { getProducts, getCategories } from "./searchProducts";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function ProductsPage() {
   const [categories, setCategories] = useState([]);
   const [products, setProducts] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [name, setName] = useState("");
+  const navigate = useNavigate();
 
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   let search = searchParams.get("search");
-  console.log(search);
   const [filterSearch, setFilterSearch] = useState(search);
   if (search !== filterSearch) setFilterSearch(search);
-  console.log(filterSearch);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -26,7 +25,7 @@ function ProductsPage() {
           fetchedProducts = fetchedProducts.filter((product) =>
             product.title.toLowerCase().includes(name.toLowerCase())
           );
-        } else {
+        } else if (filterSearch) {
           fetchedProducts = fetchedProducts.filter((product) =>
             product.title.toLowerCase().includes(filterSearch.toLowerCase())
           );
@@ -44,7 +43,13 @@ function ProductsPage() {
 
   const createProductPreviewCard = (product) => {
     return (
-      <div key={product.id} className="product-preview-card">
+      <div
+        key={product.id}
+        className="product-preview-card"
+        onClick={() => {
+          navigate("/product");
+        }}
+      >
         <img src={product.image} alt={product.title} />
         <h3>{product.title}</h3>
       </div>
